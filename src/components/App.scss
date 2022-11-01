@@ -1,0 +1,24 @@
+// .firstBlock{ 
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// }
+// .article{
+//     color: blue;
+// }
+// .myName{
+//     color: green;
+// }
+
+.App {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.messageList {
+    margin-top: 30px;
+}
