@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useRef, useEffect, useCallback} from 'react'
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
+import Box from '@mui/material/Box';
 
 export const Form = ({data, setData, setMessage}) => {
   
@@ -17,28 +18,33 @@ export const Form = ({data, setData, setMessage}) => {
             author: ''
         })
     }
+    const ariaLabel = { 'aria-label': 'description' };
+
+    const authorInput = useRef();
+
+    const clickForFocus = () => {
+        authorInput.current?.focus();
+    }
+
   return (
-    <form onSubmit = {submitForm}>
-        <TextField
-            hiddenLabel
-            id="filled-hidden-label-small"
-            defaultValue="Small"
-            variant="filled"
-            size="small"
-            placeholder='Имя' value={author} onChange = {(e) => 
+    <Box
+    component="form"
+    sx={{
+      '& > :not(style)': { m: 1 },
+    }}
+    noValidate
+    autoComplete="off"
+    onSubmit = {submitForm}>
+        <Input inputProps={ariaLabel}  placeholder='Имя' autoFocus inputRef={authorInput} value={author} onChange = {(e) => 
                 setData(prevstate => ({...prevstate,author: e.target.value}))}/>
-        <TextField
-            hiddenLabel
-            id="filled-hidden-label-small"
-            defaultValue="Small"
-            variant="filled"
-            size="small"
-            placeholder='Текст' value={text} onChange = {(e) => 
+            
+        
+        <Input inputProps={ariaLabel} placeholder='Текст' value={text} onChange = {(e) => 
                 setData(prevstate => ({...prevstate,text: e.target.value}))}/>
-        <Button type='submit' variant="contained" endIcon={<SendIcon />}>
+        <Button type='submit' variant="contained" onClick={clickForFocus} endIcon={<SendIcon />}>
             Send
         </Button>
-    </form>
+    </Box>
 
   )
   
